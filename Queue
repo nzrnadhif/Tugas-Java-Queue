@@ -1,0 +1,76 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class Queue {
+    private Mahasiswa[] queue;
+    private int front;
+    private int rear;
+    private int size;
+    private int capacity;
+
+    public Queue(int capacity) {
+        this.capacity = capacity;
+        queue = new Mahasiswa[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    // input array queue
+
+
+    public void enqueue(Mahasiswa data) {
+        if (isFull()) {
+            System.out.println("Queue sudah penuh");
+        } else {
+            rear = (rear + 1) % capacity;
+            queue[rear] = data;
+            size++;
+        }
+    }
+
+    public String dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue kosong");
+            return null;
+        } else {
+            String data = queue[front].toString();
+            front = (front + 1) % capacity;
+            size--;
+            return data;
+        }
+    }
+
+    public String peek() {
+        if (isEmpty()) {
+            System.out.println("Queue kosong");
+            return null;
+        } else {
+            return queue[front].toString();
+        }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+
+    // print array queue
+    public void printQueue() {
+        System.out.print("List Queue: ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(queue[(front + i) % capacity] + " ");
+        }
+        System.out.println();
+    }
+
+
+
+}
